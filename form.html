@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulaire Test CRM</title>
+</head>
+<body>
+  <h1>Demande de contact</h1>
+  <form id="contactForm">
+    <input type="text" name="nom" placeholder="Votre nom" required><br>
+    <input type="email" name="email" placeholder="Votre email" required><br>
+    <textarea name="message" placeholder="Votre message" required></textarea><br>
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const res = await fetch("https://webhook.site/TON_ID_WEBHOOK", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      alert("Formulaire envoyé !");
+    });
+  </script>
+</body>
+</html>
